@@ -15,8 +15,9 @@ def send_registration_mail(**kwargs):
     title = 'Регистрационные данные TerraAI'
     user = kwargs['user']
     message = f'Ваши данные для регистрации:\n' \
-              f'токен: {kwargs["token"]}\n' \
-              f'доменный префикс: {kwargs["prefix"]}\n' \
-              f'серверный порт: {kwargs["port"]}'
+              f'Токен: {kwargs["token"]}\n' \
+              f'Доменный префикс: {kwargs["prefix"]}\n' \
+              f'Серверный порт: {kwargs["port"]}' \
+              f'Jupiter ноутбук для логина и установки: ...'
 
     return send_mail(title, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
