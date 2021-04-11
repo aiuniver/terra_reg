@@ -6,7 +6,7 @@ class UserSerializer(ModelSerializer):
 
     class Meta:
         model = TerraUser
-        fields = ('email',)
+        fields = ('email', 'user_token')
 
 
 class StateSerializer(ModelSerializer):

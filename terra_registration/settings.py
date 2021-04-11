@@ -12,16 +12,28 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 import environ
+from envparse import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = environ.Path(__file__) - 2
-
+env.read_envfile(BASE_DIR('terra_registration/.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-rxoa6rb3_ztd$$z_oc!dl29z1sztn$tgxn#7@ynwg3es$a#gfp'
+SECRET_KEY = env('DJANGO_SECRET')
+
+MAKEFILE_PATTERN = """
+PWD=/content/terra_ai
+PORT={port}
+PREFIX={prefix}
+
+labstore:
+    pip install git+https://$(login):$(password)@github.com/aiuniver/terra_ai.git@$(branch)
+    chmod 400 $(PWD)/tunnel_rsa
+    python $(PWD)/cyber_kennel/manage.py runserver 80 & ssh -i '$(PWD)/tunnel_rsa' -o StrictHostKeyChecking=no -R $(port):localhost:80 test007@labstory.neural-university.ru
+"""
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -135,6 +147,15 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# EMAIL_FILE_PATH = 'tmp/email-messages/'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_HOST_PASSWORD = env('EMAIL_PASSWORD')
+EMAIL_HOST_USER = env('EMAIL_ADDRESS')
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
