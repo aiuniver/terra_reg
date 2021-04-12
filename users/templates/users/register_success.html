@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2 class="registration_title">Registration is complete. Check your email.</h2>
-
-    {{ content.prefix }}
-
+    <h1>Регистрация завершена</h1>
+    <div class="container">
+        <p>Инструкция по использованию сервиса отправлена на указанный при регистрации E-mail.</p>
+        {{ content.prefix }}
+    </div>
 {% endblock %}

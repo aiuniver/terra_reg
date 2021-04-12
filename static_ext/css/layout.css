@@ -1,0 +1,112 @@
+body {
+    color:#A7BED3;
+    font:400 16px/1.5 "Open Sans", sans-serif;
+    text-rendering:optimizeSpeed;
+    background:#17212B;
+}
+body.hidden {
+    visibility:hidden;
+}
+h1 {
+    line-height:1.25;
+    padding:10px 20px;
+    color:#fff;
+    font-size:1.5rem;
+    font-weight:400;
+    text-align:center;
+    background:#0E1621;
+}
+main > .container {
+    max-width:360px;
+    margin:0 auto;
+    padding:30px;
+    font-size:.875rem;
+    text-align:center;
+}
+
+input[type=text],
+input[type=email] {
+    width:100%;
+    height:42px;
+    padding:10px 10px 0 10px;
+    color:#fff;
+    font-size:.875rem;
+    text-align:center;
+    border:1px solid #6C7883;
+    background:#242F3D;
+    transition:border-color .1s ease-in-out;
+    border-radius:4px;
+}
+input[type=text]:focus,
+input[type=email]:focus {
+    border-color:#fff;
+}
+input[type=submit] {
+    width:100%;
+    height:42px;
+    color:#fff;
+    font-size:.875rem;
+    cursor:pointer;
+    background:#6C7883;
+    border:1px solid #0E1621;
+    border-radius:4px;
+    box-shadow:0 1px 3px rgba(0,133,255,.5);
+    transition:background-color .3s ease-in-out, box-shadow .3s ease-in-out;
+}
+input[type=submit]:hover {
+    background:#0E1621;
+    box-shadow:0 1px 3px rgba(0,133,255,0);
+}
+
+#form-registration {
+    padding:30px;
+    background:#2B5278;
+    border-radius:4px;
+    box-shadow:0 2px 5px rgba(0,0,0,.25);
+}
+#form-registration > .form-row:not(:last-child) {
+    margin-bottom:10px;
+}
+.form-group {
+    position:relative;
+}
+.form-group > label {
+    width:100%;
+    line-height:20px;
+    position:absolute;
+    left:0;
+    top:11px;
+    font-size:1rem;
+    cursor:text;
+    transition:top .1s ease-in-out, margin .1s ease-in-out, font-size .1s ease-in-out, color .1s ease-in-out;
+}
+.form-group.focused > label {
+    top:0;
+    margin:0;
+    font-size:.75rem;
+    color:#6C7883;
+}
+.form-group > label > .asteriskField {
+    display:inline-block;
+    margin:0 0 0 5px;
+    font-size:.75em;
+    font-weight:700;
+}
+.form-group > div > .invalid-feedback {
+    display:block;
+    line-height:1.25;
+    margin:0 10px;
+    padding:10px;
+    color:#fff;
+    font-size:.75rem;
+    background:#791414;
+}
+.form-group > div > .invalid-feedback > strong {
+    font-weight:600;
+}
+.form-group > div > .invalid-feedback:not(:last-child) {
+    padding-bottom:0;
+}
+.form-group > div > .invalid-feedback:last-child {
+    border-radius:0 0 4px 4px;
+}

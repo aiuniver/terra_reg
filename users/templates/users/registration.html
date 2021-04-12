@@ -3,7 +3,9 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <h2 class="registration_title">Введите данные для регистрации в сервисе TERRA AI</h2>
-  {% crispy form %}
-    <h3 class="registration_title">{{ message }}</h3>
+    <h1>Введите данные для регистрации в сервисе <b>TERRA AI</b></h1>
+    <div class="container">
+        {% crispy form %}
+        <div class="message">{{ message }}</div>
+    </div>
 {% endblock %}

@@ -19,7 +19,16 @@ from django.urls import path, include
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include("users.urls", namespace='users')),
+    path("admin/", admin.site.urls),
+    path("", include("users.urls", namespace="users")),
     path("api/v1/", include("api.urls", namespace="apps_api")),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+if "debug_toolbar" in settings.INSTALLED_APPS:
+    import debug_toolbar
+
+    urlpatterns.append(
+        path("__debug__/", include(debug_toolbar.urls)),
+    )
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
