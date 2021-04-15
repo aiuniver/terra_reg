@@ -35,7 +35,7 @@ class LoginUserAndGetUsersStatesView(ListAPIView):
             return Response(
                 LoginUserResponse(
                     success=False,
-                    error=f"Пользователь {email} в системе не зарегистрирован",
+                    error=f"Пользователь «{email}» в системе не зарегистрирован",
                 ).__dict__
             )
         return Response(
