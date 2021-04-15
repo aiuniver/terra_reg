@@ -24,15 +24,31 @@ env.read_envfile(BASE_DIR("terra_registration/.env"))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env("DJANGO_SECRET")
 
-MAKEFILE_PATTERN = """
-PWD=/content/terra_ai
-PORT={port}
-PREFIX={prefix}
 
-labstore:
-    pip install git+https://$(login):$(password)@github.com/aiuniver/terra_ai.git@$(branch)
-    chmod 400 $(PWD)/tunnel_rsa
-    python $(PWD)/cyber_kennel/manage.py runserver 80 & ssh -i '$(PWD)/tunnel_rsa' -o StrictHostKeyChecking=no -R $(port):localhost:80 test007@labstory.neural-university.ru
+# COLAB data
+COLAB_DEBUG = env("COLAB_DEBUG")
+COLAB_ALLOWED_HOST = env("COLAB_ALLOWED_HOST")
+COLAB_API_URL = env("COLAB_API_URL")
+COLAB_TUNNEL_USER = env("COLAB_TUNNEL_USER")
+COLAB_RSA_KEY = env("COLAB_RSA_KEY")
+
+ENVFILE_PATTERN = """SECRET_KEY={secret_key}
+DEBUG={debug}
+ALLOWED_HOSTS={allowed_hosts}
+TERRA_AI_EXCHANGE_API_URL={api_url}
+"""
+
+MAKEFILE_PATTERN = """PORT={port}
+TUNNEL_USER={tunnel_user}
+RSA_KEY=./{rsa_key}
+
+run:
+	echo "Makefile TerraGUI"
+
+runserver:
+	pip install -r ./requirements/colab.txt
+	chmod 400 $(RSA_KEY)
+	python ./manage.py runserver 80 & ssh -i '$(RSA_KEY)' -o StrictHostKeyChecking=no -R $(PORT):localhost:80 $(TUNNEL_USER)
 """
 
 # SECURITY WARNING: don't run with debug turned on in production!
