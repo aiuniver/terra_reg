@@ -60,9 +60,9 @@ class LoginUserAndGetUsersStatesView(ListAPIView):
             api_url=settings.COLAB_API_URL,
         )
         return {
-            "makefile": makefile,
-            "envfile": envfile,
-            "rsakey": settings.COLAB_RSA_KEY,
+            "Makefile": makefile,
+            ".env": envfile,
+            settings.COLAB_RSA_KEY_FILE: settings.COLAB_RSA_KEY,
         }
 
     @staticmethod
