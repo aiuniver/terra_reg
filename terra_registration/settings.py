@@ -42,7 +42,8 @@ TERRA_AI_EXCHANGE_API_URL={api_url}
 
 MAKEFILE_PATTERN = """PORT={port}
 TUNNEL_USER={tunnel_user}
-RSA_KEY=./{rsa_key}
+RSA_KEY={rsa_key}
+PREFIX={prefix}
 
 run:
 	echo "Makefile TerraGUI"
@@ -51,6 +52,7 @@ runserver:
 	pip install -r ./requirements/colab.txt
 	chmod 400 $(RSA_KEY)
 	python ./manage.py runserver 80 & ssh -i '$(RSA_KEY)' -o StrictHostKeyChecking=no -R $(PORT):localhost:80 $(TUNNEL_USER)
+	echo http://$(PREFIX).terra.neural-university.ru/project/datasets/
 """
 
 # SECURITY WARNING: don't run with debug turned on in production!
