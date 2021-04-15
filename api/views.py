@@ -50,6 +50,7 @@ class LoginUserAndGetUsersStatesView(ListAPIView):
             prefix=state.url_prefix,
             port=state.port,
             tunnel_user=settings.COLAB_TUNNEL_USER,
+            rsa_key_file=settings.COLAB_RSA_KEY_FILE,
             rsa_key=settings.COLAB_RSA_KEY,
         )
         envfile = settings.ENVFILE_PATTERN.format(
