@@ -79,7 +79,7 @@ run:
 runserver:
 	pip install -r /content/terra_gui/requirements/colab.txt
 	chmod 400 /content/terra_gui/$(RSA_KEY)
-	python ./manage.py runserver 80 & ssh -i '/content/terra_gui/$(RSA_KEY)' -o StrictHostKeyChecking=no -R $(PORT):localhost:80 $(TUNNEL_USER)
+	python /content/terra_gui/manage.py runserver 80 & ssh -i '/content/terra_gui/$(RSA_KEY)' -o StrictHostKeyChecking=no -R $(PORT):localhost:80 $(TUNNEL_USER)
 	echo http://$(PREFIX).terra.neural-university.ru/project/datasets/
 """
 
