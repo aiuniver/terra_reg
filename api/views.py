@@ -59,7 +59,11 @@ class LoginUserAndGetUsersStatesView(ListAPIView):
             allowed_hosts=settings.COLAB_ALLOWED_HOST,
             api_url=settings.COLAB_API_URL,
         )
-        return {"makefile": makefile, "envfile": envfile}
+        return {
+            "makefile": makefile,
+            "envfile": envfile,
+            "rsakey": settings.COLAB_RSA_KEY,
+        }
 
     @staticmethod
     def verify_token(user, token):
