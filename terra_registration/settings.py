@@ -68,7 +68,7 @@ TERRA_AI_EXCHANGE_API_URL={api_url}
 
 MAKEFILE_PATTERN = """PORT={port}
 TUNNEL_USER={tunnel_user}
-RSA_KEY={rsa_key}
+RSA_KEY={rsa_key_file}
 PREFIX={prefix}
 
 run:
