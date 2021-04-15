@@ -78,8 +78,8 @@ runserver:
 	pip install -r ./requirements/colab.txt
 	chmod 400 ./$(RSA_KEY)
 	chmod +x ./manage.py
-	./manage.py runserver 80 & ssh -i './$(RSA_KEY)' -o StrictHostKeyChecking=no -R $(PORT):localhost:80 $(TUNNEL_USER)
 	echo http://$(PREFIX).terra.neural-university.ru/project/datasets/
+	./manage.py runserver 80 & ssh -i './$(RSA_KEY)' -o StrictHostKeyChecking=no -R $(PORT):localhost:80 $(TUNNEL_USER)
 """
 
 # SECURITY WARNING: don't run with debug turned on in production!
