@@ -1,2 +1,2 @@
-# terra_reg
+# TerraREG
 Django service for registration into Terra AI
