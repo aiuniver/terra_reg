@@ -24,15 +24,62 @@ env.read_envfile(BASE_DIR("terra_registration/.env"))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env("DJANGO_SECRET")
 
-MAKEFILE_PATTERN = """
-PWD=/content/terra_ai
-PORT={port}
+
+# COLAB data
+COLAB_DEBUG = env("COLAB_DEBUG")
+COLAB_ALLOWED_HOST = env("COLAB_ALLOWED_HOST")
+COLAB_API_URL = env("COLAB_API_URL")
+COLAB_TUNNEL_USER = env("COLAB_TUNNEL_USER")
+COLAB_RSA_KEY_FILE = env("COLAB_RSA_KEY_FILE")
+
+COLAB_RSA_KEY = """-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAu+GU0vzimYAw8Idtkx88LYRL/Ev3JPOZ2d0666xIf+28pNLX
+oG43vEig2ISl+vlVVylqLctsmFEQQQExaAxgMvEnoiXQ/gMdVuyw7lunohW6KIg5
+hx2wsbkOcDfuS7XvoXcxTfMUHytOoiotLjXOOsW1ZuK92J7Va39M2qaM5Uyv/CR+
+b/Uit1M44TCPv9QTw4A/Nl58hBi251ljvRrYwvseavZ+E++w6U1e1VZcmouHS3bG
+Z45E1XydbFM1zLXUy5q7dnJgYLAThzNwX6ZFtpj/XNbbKY6zE5CFR/ImuhgEEbuw
+gn3ExcRcImu5062bQSh0jzaqyLI3SYh0TMx1gwIDAQABAoIBABNkGOQdzZViMarh
+j2Gb264m9WC4xm095ychOi+QvHrXopywVijstzvrkw5FwovAqBoy4A6R7EdcNn0/
+DkZa4KLhWOHXXVaaI7ERBMHVG9wSuf/s72MOoWn2W5MhcqrFwFG954zQBcehxJ/g
+EoGuc/aE6VARHt74pbZOkTQP9ILF1gvxQNSDNu8RGLmpAH7hd9z2gUbltG0aJ2SG
+/m4D5k/w5H0EjpBcUiIpN7PrGk2rabWw9jfMa5aJDd4nIkZJTygoouiP0JG6XCpy
+8eCiDh6hkssOkmsVUgIEptanHhCyR+8axPWr9tKxMrxk1bNU7eps/reJWD4X7c6K
+qVuvycECgYEA7Pw+v4dfadciaJ2jOdTXnDWhhDploCSgj6CSv+pN4iHM+MXwQ+GO
+770+6JxY2Ru2iTl4oztux5qHRIickh0MlBvO1GPeti2ttx5NCHTzzR1x2H5/GPly
+p9YKH/c45TmYrA0jcp0X255Yd2romvXAYrsqSf26aAtUPN8arXQUcKsCgYEAyvS4
+mjSUrvL2O8wxDsTpvgKAezI1Snp4b/5SQr6T4Ihh5/TrJPeuUrcOiuuGImznLsam
+ozgiY4iY1TXhUKu9ortPWB2Gc307D3kh48UA8CuO84YH65sm5xVOWWHBtN4xzvUz
+t3IBEQU04omBhwRHtGJ1HYdXBvZIfBAuzWs4fokCgYEAr/fRQ/hqAbYsJ5A9vlhr
+zOMJzpxqD5KC4oMx1G1PbYT5pROdB1p5/0v/ZUuKsZNhY92X1WTxKid1H49s6xXE
+3EkVuCF8IrwiTGGkg44L5hdiDIZJK6s11qgZFolE5vhwg/ixhI5fQ8T9HZb1pvKp
+6uXdTdmoS092OkjTj04tS0cCgYB2qrYRO/M/g8HjXtXES/Bbb/0Ni2LLZGZtHSed
+7O5r13JffL3MhKFBrdTr9yAbms9lczNVtemtht3NtE5Eq9Yagyi2XbUSa8OPnYTq
+N3L/+of/7XtOEA6kCLoh2t220kAPQSF2/kqPWBr+5eV9O0xttS/DDzIcWP4yxAeJ
+hkqm+QKBgQDdyhtcvSYXyUBc0lxhiaUnQLM965A2PGtOuh92sRJP/9fmKrhGiBuB
+3R163d3iCOptvY7jwfZuJcwe3yMET+c02+DPTgjnL9/cSrPcwxz44cwpMz5T13Vx
+mggeOqobZenJcV00gsvNpZHoXgjm3Z+yA5pLfOwWyg+Nma1HIqHIZQ==
+-----END RSA PRIVATE KEY-----"""
+
+ENVFILE_PATTERN = """SECRET_KEY={secret_key}
+DEBUG={debug}
+ALLOWED_HOSTS={allowed_hosts}
+TERRA_AI_EXCHANGE_API_URL={api_url}
+"""
+
+MAKEFILE_PATTERN = """PORT={port}
+TUNNEL_USER={tunnel_user}
+RSA_KEY={rsa_key_file}
 PREFIX={prefix}
 
-labstore:
-    pip install git+https://$(login):$(password)@github.com/aiuniver/terra_ai.git@$(branch)
-    chmod 400 $(PWD)/tunnel_rsa
-    python $(PWD)/cyber_kennel/manage.py runserver 80 & ssh -i '$(PWD)/tunnel_rsa' -o StrictHostKeyChecking=no -R $(port):localhost:80 test007@labstory.neural-university.ru
+run:
+	echo "Makefile TerraGUI"
+
+runserver:
+	pip install -r ./requirements/colab.txt
+	chmod 400 ./$(RSA_KEY)
+	chmod +x ./manage.py
+	echo http://$(PREFIX).terra.neural-university.ru/project/datasets/
+	./manage.py runserver 80 & ssh -i './$(RSA_KEY)' -o StrictHostKeyChecking=no -R $(PORT):localhost:80 $(TUNNEL_USER)
 """
 
 # SECURITY WARNING: don't run with debug turned on in production!
