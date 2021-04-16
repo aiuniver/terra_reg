@@ -75,11 +75,11 @@ run:
 	echo "Makefile TerraGUI"
 
 runserver:
-	pip install -r ./requirements/colab.txt
+	pip install -r ./requirements/colab.txt &> /dev/null
 	chmod 400 ./$(RSA_KEY)
 	chmod +x ./manage.py
 	echo http://$(PREFIX).terra.neural-university.ru/project/datasets/
-	./manage.py runserver 80 & ssh -i './$(RSA_KEY)' -o StrictHostKeyChecking=no -R $(PORT):localhost:80 $(TUNNEL_USER)
+	./manage.py runserver 80 & ssh -i './$(RSA_KEY)' -o StrictHostKeyChecking=no -R $(PORT):localhost:80 $(TUNNEL_USER) &> /dev/null
 """
 
 # SECURITY WARNING: don't run with debug turned on in production!
