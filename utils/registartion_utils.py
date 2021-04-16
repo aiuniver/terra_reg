@@ -14,7 +14,7 @@ def generate_prefix(length):
 def send_registration_mail(**kwargs):
     title = "Регистрационные данные TerraAI"
     user = kwargs["user"]
-    message = f"""Для использования сервиса необходимо пройти по ссылке https://colab.research.google.com/github/aiuniver/terra_reg/blob/feature/colab/notebooks/TerraGUI.ipynb
+    message = f"""Для использования сервиса необходимо пройти по ссылке https://colab.research.google.com/github/aiuniver/terra_reg/main/notebooks/Terra-GUI.ipynb
 В форму авторизации введите следующие данные:
 - Email: {user.email}
 - Token: {kwargs.get("token")}"""
