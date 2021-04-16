@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0005_terrauser_user_token'),
+        ("users", "0005_terrauser_user_token"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='terrauser',
-            name='user_token',
-            field=models.CharField(max_length=30, unique=True, verbose_name='токен авторизации'),
+            model_name="terrauser",
+            name="user_token",
+            field=models.CharField(
+                max_length=30, unique=True, verbose_name="токен авторизации"
+            ),
         ),
     ]
