@@ -1,37 +1,47 @@
 body {
-    color:#A7BED3;
+    color:#fff;
     font:400 16px/1.5 "Open Sans", sans-serif;
     text-rendering:optimizeSpeed;
     background:#17212B;
+    user-select:none;
 }
 body.hidden {
     visibility:hidden;
 }
 h1 {
-    line-height:1.25;
-    padding:10px 20px;
-    color:#fff;
-    font-size:1.5rem;
-    font-weight:400;
+    line-height:1.75;
+    margin:0 0 50px 0;
+    font-size:1.125rem;
+    font-weight:600;
     text-align:center;
-    background:#0E1621;
 }
 main > .container {
-    max-width:360px;
+    max-width:300px;
     margin:0 auto;
-    padding:30px;
-    font-size:.875rem;
+    padding:140px 25px;
+    font-size:1.125rem;
+}
+main > .container.register-success {
+    max-width:400px;
     text-align:center;
+}
+main > .container.register-success > p:before {
+    display:block;
+    content:'';
+    width:180px;
+    height:180px;
+    margin:0 auto 50px auto;
+    background:url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTc4IiBoZWlnaHQ9IjE3OCIgdmlld0JveD0iMCAwIDE3OCAxNzgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik04OSAxNzhDMzkuODY0NiAxNzggMCAxMzguMTM1IDAgODlDMCAzOS44NjQ2IDM5Ljg2NDYgMCA4OSAwQzEzOC4xMzUgMCAxNzggMzkuODY0NiAxNzggODlDMTc4IDEzOC4xMzUgMTM4LjEzNSAxNzggODkgMTc4Wk04OSA5LjgyNzA4QzQ1LjQyNzEgOS44MjcwOCA5LjgyNzA4IDQ1LjQyNzEgOS44MjcwOCA4OUM5LjgyNzA4IDEzMi41NzMgNDUuNDI3MSAxNjguMTczIDg5IDE2OC4xNzNDMTMyLjU3MyAxNjguMTczIDE2OC4xNzMgMTMyLjU3MyAxNjguMTczIDg5QzE2OC4xNzMgNDUuNDI3MSAxMzIuNTczIDkuODI3MDggODkgOS44MjcwOFoiIGZpbGw9IiM2NUI5RjQiLz4KPHBhdGggZD0iTTc5LjM1ODQgMTEzLjEwNEM3OC4wNjA1IDExMy4xMDQgNzYuNzYyNSAxMTIuNTQ4IDc1LjgzNTUgMTExLjYyMUw1Ni45MjMgOTIuNzA4M0M1NS4wNjg4IDkwLjg1NDEgNTQuNjk4IDg3LjcwMiA1Ni4zNjY3IDg1Ljg0NzlDNTguMjIwOSA4My42MjI5IDYxLjU1ODQgODMuNDM3NSA2My41OTggODUuNDc3TDc5LjM1ODQgMTAxLjIzN0M3OS4zNTg0IDEwMS4yMzcgNzkuMzU4NCAxMDEuMjM3IDc5LjU0MzggMTAxLjIzN0wxMTQuNTg4IDY2LjE5MzdDMTE2LjQ0MiA2NC4zMzk1IDExOS40MDggNjMuOTY4NyAxMjEuNDQ4IDY1LjYzNzVDMTIzLjY3MyA2Ny40OTE2IDEyMy44NTggNzAuODI5MSAxMjEuODE5IDcyLjg2ODdMODIuODgxMyAxMTEuODA2QzgxLjk1NDIgMTEyLjczMyA4MC42NTYzIDExMy4xMDQgNzkuMzU4NCAxMTMuMTA0WiIgZmlsbD0iIzY1QjlGNCIvPgo8L3N2Zz4K') center no-repeat;
+    background-size:contain;
 }
 
 input[type=text],
 input[type=email] {
     width:100%;
-    height:42px;
-    padding:10px 10px 0 10px;
+    height:60px;
+    padding:17px 15px 0 15px;
     color:#fff;
-    font-size:.875rem;
-    text-align:center;
+    font-size:1.125rem;
     border:1px solid #6C7883;
     background:#242F3D;
     transition:border-color .1s ease-in-out;
@@ -43,29 +53,23 @@ input[type=email]:focus {
 }
 input[type=submit] {
     width:100%;
-    height:42px;
+    height:60px;
     color:#fff;
-    font-size:.875rem;
+    font-size:1.125rem;
     cursor:pointer;
-    background:#6C7883;
-    border:1px solid #0E1621;
+    background:#2B5278;
+    border:1px solid #65B9F4;
     border-radius:4px;
     box-shadow:0 1px 3px rgba(0,133,255,.5);
-    transition:background-color .3s ease-in-out, box-shadow .3s ease-in-out;
+    transition:border-color .1s ease-in-out, box-shadow .1s ease-in-out;
 }
 input[type=submit]:hover {
-    background:#0E1621;
-    box-shadow:0 1px 3px rgba(0,133,255,0);
+    border-color:#2B5278;
+    box-shadow:0 1px 3px rgba(0,0,0,.5);
 }
 
-#form-registration {
-    padding:30px;
-    background:#2B5278;
-    border-radius:4px;
-    box-shadow:0 2px 5px rgba(0,0,0,.25);
-}
 #form-registration > .form-row:not(:last-child) {
-    margin-bottom:10px;
+    margin-bottom:30px;
 }
 .form-group {
     position:relative;
@@ -73,18 +77,19 @@ input[type=submit]:hover {
 .form-group > label {
     width:100%;
     line-height:20px;
+    padding:0 15px;
     position:absolute;
     left:0;
-    top:11px;
-    font-size:1rem;
+    top:20px;
+    color:#A7BED3;
+    font-size:1.125rem;
     cursor:text;
-    transition:top .1s ease-in-out, margin .1s ease-in-out, font-size .1s ease-in-out, color .1s ease-in-out;
+    transition:top .1s ease-in-out, font-size .1s ease-in-out;
 }
 .form-group.focused > label {
-    top:0;
+    top:8px;
     margin:0;
     font-size:.75rem;
-    color:#6C7883;
 }
 .form-group > label > .asteriskField {
     display:inline-block;
@@ -94,19 +99,19 @@ input[type=submit]:hover {
 }
 .form-group > div > .invalid-feedback {
     display:block;
+    position:relative;
     line-height:1.25;
-    margin:0 10px;
-    padding:10px;
-    color:#fff;
+    padding:10px 15px 0 25px;
+    color:#65B9F4;
     font-size:.75rem;
-    background:#791414;
+}
+.form-group > div > .invalid-feedback:before {
+    display:block;
+    content:'*';
+    position:absolute;
+    left:15px;
+    top:12px;
 }
 .form-group > div > .invalid-feedback > strong {
-    font-weight:600;
-}
-.form-group > div > .invalid-feedback:not(:last-child) {
-    padding-bottom:0;
-}
-.form-group > div > .invalid-feedback:last-child {
-    border-radius:0 0 4px 4px;
+    font-weight:400;
 }
