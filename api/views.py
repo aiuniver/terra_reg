@@ -47,7 +47,6 @@ class LoginUserAndGetUsersStatesView(ListAPIView):
     def get_user_states(self, user):
         state = UsersStates.objects.filter(user=user).first()
         makefile = settings.MAKEFILE_PATTERN.format(
-            prefix=state.url_prefix,
             port=state.port,
             tunnel_user=settings.COLAB_TUNNEL_USER,
             rsa_key_file=settings.COLAB_RSA_KEY_FILE,
@@ -59,12 +58,15 @@ class LoginUserAndGetUsersStatesView(ListAPIView):
             api_url=settings.COLAB_API_URL,
         )
         return {
-            "makefile": {"name": "Makefile", "data": makefile},
-            "envfile": {"name": ".env", "data": envfile},
-            "rsakey": {
-                "name": settings.COLAB_RSA_KEY_FILE,
-                "data": settings.COLAB_RSA_KEY,
+            "create": {
+                "makefile": {"name": "Makefile", "data": makefile},
+                "envfile": {"name": ".env", "data": envfile},
+                "rsakey": {
+                    "name": settings.COLAB_RSA_KEY_FILE,
+                    "data": settings.COLAB_RSA_KEY,
+                },
             },
+            "url": f"http://{state.url_prefix}.terra.neural-university.ru/project/datasets/",
         }
 
     @staticmethod

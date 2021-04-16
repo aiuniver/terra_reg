@@ -24,7 +24,6 @@ env.read_envfile(BASE_DIR("terra_registration/.env"))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env("DJANGO_SECRET")
 
-
 # COLAB data
 COLAB_DEBUG = env("COLAB_DEBUG")
 COLAB_ALLOWED_HOST = env("COLAB_ALLOWED_HOST")
@@ -69,24 +68,21 @@ TERRA_AI_EXCHANGE_API_URL={api_url}
 MAKEFILE_PATTERN = """PORT={port}
 TUNNEL_USER={tunnel_user}
 RSA_KEY={rsa_key_file}
-PREFIX={prefix}
 
 run:
 	echo "Makefile TerraGUI"
 
 runserver:
-	pip install -r ./requirements/colab.txt &> /dev/null
+	pip install -r ./requirements/colab.txt
 	chmod 400 ./$(RSA_KEY)
 	chmod +x ./manage.py
-	echo http://$(PREFIX).terra.neural-university.ru/project/datasets/
-	./manage.py runserver 80 & ssh -i './$(RSA_KEY)' -o StrictHostKeyChecking=no -R $(PORT):localhost:80 $(TUNNEL_USER) &> /dev/null
+	./manage.py runserver 80 & ssh -i './$(RSA_KEY)' -o StrictHostKeyChecking=no -R $(PORT):localhost:80 $(TUNNEL_USER)
 """
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
 
 # Application definition
 
@@ -150,7 +146,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "terra_registration.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -181,7 +176,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -194,7 +188,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
